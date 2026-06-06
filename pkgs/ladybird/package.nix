@@ -99,6 +99,10 @@ stdenv.mkDerivation (finalAttrs: {
     cp ${hstsPreload} build/Caches/HSTSPreload/transport_security_state_static.json
   '';
 
+  preBuild = ''
+    export LD_LIBRARY_PATH="$out/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+  '';
+
   nativeBuildInputs = [
     cargo
     cmake
@@ -160,7 +164,7 @@ stdenv.mkDerivation (finalAttrs: {
     "-DCMAKE_INSTALL_LIBEXECDIR=libexec"
   ];
 
-  env.NIX_LDFLAGS = "-lGL -lfontconfig -rpath '$ORIGIN/../lib'";
+  env.NIX_LDFLAGS = "-lGL -lfontconfig";
 
   postInstall = lib.optionalString stdenv.hostPlatform.isDarwin ''
     mkdir -p $out/Applications $out/bin
