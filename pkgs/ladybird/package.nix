@@ -100,7 +100,7 @@ endif()
 EOF
 
     cat <<'EOF' >> Libraries/LibURL/CMakeLists.txt
-if(NOT BUILD_SHARED_LIBS)
+if(NOT BUILD_SHARED_LIBS AND TARGET liburl_rust)
     get_target_property(_liburl_rust_lib liburl_rust IMPORTED_LOCATION)
     add_custom_command(TARGET LibURL POST_BUILD
         COMMAND ''${CMAKE_AR} -x ''${_liburl_rust_lib}
