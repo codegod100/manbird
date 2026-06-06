@@ -81,7 +81,7 @@ stdenv.mkDerivation (finalAttrs: {
       's/find_package\(ICU 78\.[0-9]+ EXACT REQUIRED COMPONENTS data i18n uc\)/find_package(ICU ${icu78.version} EXACT REQUIRED COMPONENTS data i18n uc)/' \
       Meta/CMake/check_for_dependencies.cmake
 
-    printf '\ntarget_link_libraries(BindingsGenerator PRIVATE LibUnicode)\n' >> \
+    printf '\ntarget_link_libraries(BindingsGenerator LibUnicode)\n' >> \
       Meta/Lagom/Tools/CodeGenerators/LibWeb/BindingsGenerator/CMakeLists.txt
   '';
 
