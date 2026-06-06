@@ -3,6 +3,7 @@
   stdenv,
   fetchFromGitHub,
   fetchpatch,
+  fetchurl,
   unicode-emoji,
   unicode-character-database,
   unicode-idna,
@@ -51,6 +52,11 @@ let
   upstreamVersionDate = envOr "LADYBIRD_VERSION_DATE" "2026-05-04";
   upstreamSrcHash = envOr "LADYBIRD_SRC_HASH" "sha256-BdJ24YtKMv8B6Vvequf9b5qr0S3FfFuphFo78mCIaN4=";
   upstreamCargoHash = envOr "LADYBIRD_CARGO_HASH" "sha256-sbNYOdY56+waCVQHbGuvV5jT9EawV2IiGmL1e/O6ZRc=";
+
+  hstsPreload = fetchurl {
+    url = "https://raw.githubusercontent.com/chromium/chromium/main/net/http/transport_security_state_static.json";
+    hash = "sha256-YuiotSk0Lf3IHz/UjgCmU/brdB1lszob6DN4DXyjiWU=";
+  };
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "ladybird";
@@ -92,6 +98,9 @@ stdenv.mkDerivation (finalAttrs: {
 
     mkdir build/Caches/PublicSuffix
     cp ${publicsuffix-list}/share/publicsuffix/public_suffix_list.dat build/Caches/PublicSuffix
+
+    mkdir build/Caches/HSTSPreload
+    cp ${hstsPreload} build/Caches/HSTSPreload/transport_security_state_static.json
   '';
 
   nativeBuildInputs = [
