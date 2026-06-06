@@ -155,6 +155,7 @@ stdenv.mkDerivation (finalAttrs: {
   ];
 
   cmakeFlags = [
+    (lib.cmakeBool "BUILD_SHARED_LIBS" false)
     (lib.cmakeBool "ENABLE_LTO_FOR_RELEASE" false)
     "-DLADYBIRD_CACHE_DIR=Caches"
     "-DENABLE_NETWORK_DOWNLOADS=OFF"
