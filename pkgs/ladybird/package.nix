@@ -80,10 +80,6 @@ stdenv.mkDerivation (finalAttrs: {
     sed -E -i \
       's/find_package\(ICU 78\.[0-9]+ EXACT REQUIRED COMPONENTS data i18n uc\)/find_package(ICU ${icu78.version} EXACT REQUIRED COMPONENTS data i18n uc)/' \
       Meta/CMake/check_for_dependencies.cmake
-
-    substituteInPlace Meta/CMake/lagom_install_options.cmake \
-      --replace-fail "''${CMAKE_INSTALL_BINDIR}" "bin" \
-      --replace-fail "''${CMAKE_INSTALL_LIBDIR}" "lib"
   '';
 
   preConfigure = ''
