@@ -16,7 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@main
-      - uses: DeterminateSystems/magic-nix-cache-action@main
       - name: Build pinned package
         run: nix build .#ladybird
 
@@ -26,6 +25,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@main
-      - uses: DeterminateSystems/magic-nix-cache-action@main
       - name: Build upstream master
-        run: ./ci/build-latest.sh
+        run: bash ./ci/build-latest.sh

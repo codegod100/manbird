@@ -70,8 +70,8 @@ stdenv.mkDerivation (finalAttrs: {
   postPatch = ''
     sed -i '/iconutil/d' UI/CMakeLists.txt
 
-    perl -0pi -e \
-      's/find_package\(ICU 78\.[0-9]+ EXACT REQUIRED COMPONENTS data i18n uc\)/find_package(ICU ${icu78.version} EXACT REQUIRED COMPONENTS data i18n uc)/ or die "ICU dependency not found\n"/' \
+    sed -E -i \
+      's/find_package\(ICU 78\.[0-9]+ EXACT REQUIRED COMPONENTS data i18n uc\)/find_package(ICU ${icu78.version} EXACT REQUIRED COMPONENTS data i18n uc)/' \
       Meta/CMake/check_for_dependencies.cmake
 
     substituteInPlace Meta/CMake/lagom_install_options.cmake \
