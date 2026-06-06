@@ -16,6 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@main
+      - uses: cachix/cachix-action@v17
+        with:
+          name: codegod100
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: Build pinned package
         run: nix build .#ladybird
 
@@ -25,5 +29,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@main
+      - uses: cachix/cachix-action@v17
+        with:
+          name: codegod100
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: Build upstream master
         run: bash ./ci/build-latest.sh
