@@ -86,8 +86,9 @@ stdenv.mkDerivation (finalAttrs: {
 
     cat <<'EOF' >> Libraries/LibUnicode/CMakeLists.txt
 if(NOT BUILD_SHARED_LIBS)
+    get_target_property(_libunicode_rust_lib libunicode_rust IMPORTED_LOCATION)
     add_custom_command(TARGET LibUnicode POST_BUILD
-        COMMAND ''${CMAKE_AR} -x $<TARGET_FILE:libunicode_rust>
+        COMMAND ''${CMAKE_AR} -x ''${_libunicode_rust_lib}
         COMMAND ''${CMAKE_AR} -qS $<TARGET_FILE:LibUnicode> *.o
         COMMAND ''${CMAKE_RANLIB} $<TARGET_FILE:LibUnicode>
         COMMAND ''${CMAKE_COMMAND} -E remove -f *.o
@@ -100,8 +101,9 @@ EOF
 
     cat <<'EOF' >> Libraries/LibURL/CMakeLists.txt
 if(NOT BUILD_SHARED_LIBS)
+    get_target_property(_liburl_rust_lib liburl_rust IMPORTED_LOCATION)
     add_custom_command(TARGET LibURL POST_BUILD
-        COMMAND ''${CMAKE_AR} -x $<TARGET_FILE:liburl_rust>
+        COMMAND ''${CMAKE_AR} -x ''${_liburl_rust_lib}
         COMMAND ''${CMAKE_AR} -qS $<TARGET_FILE:LibURL> *.o
         COMMAND ''${CMAKE_RANLIB} $<TARGET_FILE:LibURL>
         COMMAND ''${CMAKE_COMMAND} -E remove -f *.o
@@ -114,8 +116,9 @@ EOF
 
     cat <<'EOF' >> Libraries/LibRegex/CMakeLists.txt
 if(NOT BUILD_SHARED_LIBS)
+    get_target_property(_libregex_rust_lib libregex_rust IMPORTED_LOCATION)
     add_custom_command(TARGET LibRegex POST_BUILD
-        COMMAND ''${CMAKE_AR} -x $<TARGET_FILE:libregex_rust>
+        COMMAND ''${CMAKE_AR} -x ''${_libregex_rust_lib}
         COMMAND ''${CMAKE_AR} -qS $<TARGET_FILE:LibRegex> *.o
         COMMAND ''${CMAKE_RANLIB} $<TARGET_FILE:LibRegex>
         COMMAND ''${CMAKE_COMMAND} -E remove -f *.o
