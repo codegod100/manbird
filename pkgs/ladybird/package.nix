@@ -13,6 +13,7 @@
   curlFull,
   libavif,
   angle,
+  libedit,
   libjxl,
   libpulseaudio,
   libwebp,
@@ -114,6 +115,7 @@ stdenv.mkDerivation (finalAttrs: {
     fontconfig
     libavif
     angle
+    libedit
     libjxl
     libwebp
     libxcrypt
