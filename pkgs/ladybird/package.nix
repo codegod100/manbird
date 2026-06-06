@@ -160,7 +160,7 @@ stdenv.mkDerivation (finalAttrs: {
     "-DCMAKE_INSTALL_LIBEXECDIR=libexec"
   ];
 
-  env.NIX_LDFLAGS = "-lGL -lfontconfig -Wl,-rpath,'$ORIGIN/../lib'";
+  env.NIX_LDFLAGS = "-lGL -lfontconfig -rpath '$ORIGIN/../lib'";
 
   postInstall = lib.optionalString stdenv.hostPlatform.isDarwin ''
     mkdir -p $out/Applications $out/bin
