@@ -100,7 +100,7 @@ stdenv.mkDerivation (finalAttrs: {
   '';
 
   preBuild = ''
-    export LD_LIBRARY_PATH="$out/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+    export LD_LIBRARY_PATH="$out/lib''${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
   '';
 
   nativeBuildInputs = [
